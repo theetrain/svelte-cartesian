@@ -16,8 +16,13 @@
   "author": "Enrico Sacchetti <enrico@theetrain.ca>",
   "license": "MIT",
   "devDependencies": {
+    "@eslint/eslintrc": "^3.1.0",
     "@playwright/test": "^1.44.1",
+    "@sveltejs/vite-plugin-svelte": "^3.1.1",
     "@types/node": "^20.14.8",
+    "eslint": "^9.5.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-svelte": "^2.40.0",
     "svelte": "^4.2.18",
     "vite": "^5.3.1",
     "vitest": "^1.6.0"
