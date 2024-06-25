@@ -1,1 +1,1 @@
-export { default as Cartesian } from './src/Cartesian.svelte'
+export { default as Cartesian } from './src/lib/Cartesian.svelte'

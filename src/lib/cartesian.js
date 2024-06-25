@@ -1,8 +1,9 @@
 /**
- *
- * @param {{[key: string]: any[]}} obj
- * @returns {{ [key: string]: any }[]}
- */
+  * Convert props with arrays of values into their
+  * Cartesian Product: an array of prop combinations.
+  * @param {{[key: string]: any[]}} obj
+  * @returns {{ [key: string]: any }[]}
+  */
 export function getCartesianProduct (obj) {
   const entries = Object.entries(obj)
 
