@@ -1,0 +1,14 @@
+body {
+  letter-spacing: normal;
+  font-family: Arial;
+  font-weight: 400;
+  font-size: 100%;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  font: inherit;
+  box-sizing: border-box;
+  margin: 0;
+}

@@ -6,7 +6,7 @@ Product") for visual regression testing.
 - [Svelte 4 usage](#svelte-4-usage)
   - [Basic usage (Svelte 4)](#basic-usage-svelte-4)
   - [Usage with slots (Svelte 4)](#usage-with-slots-svelte-4)
-  - [Customizing `<Cartesian>` (Svelte 4)](#customizing-cartesian-svelte-4)
+  - [Styling `<Cartesian>` (Svelte 4)](#styling-cartesian-svelte-4)
   - [`<Cartesian>` props (Svelte 4)](#cartesian-props-svelte-4)
 - [Svelte 5 usage (experimental)](#svelte-5-usage-experimental)
 - [Project roadmap](#project-roadmap)
@@ -96,21 +96,20 @@ Product") for visual regression testing.
 </Cartesian>
 ```
 
-### Customizing `<Cartesian>` (Svelte 4)
+### Styling `<Cartesian>` (Svelte 4)
 
 `<Cartesian>` has these default CSS behaviours:
 
 - Use CSS Grid with a `gap` of `1rem`.
 - `padding` is set to `0.5rem 1rem` to allow consistent space when multiple
   `<Cartesian>` components are rendered one after the other.
-- `grid-template-columns` is set to the
-  number of values passed in your first `props` key, or `2` if `style` gets
-  overridden.
+- `grid-template-columns` is set to `var(--columns, repeat(2, 1fr))` for a
+  default 2-column grid overridable with the `--columns` CSS variable.
 
 There are a few ways to override its styles:
 
 1. Via the `--columns` CSS variable; you may use Svelte `--style-props` or
-   `style="--columns(3)"` to set a new value.
+   `style="--columns: repeat(3, 1fr)"` to set a new value.
 2. Use the `style` attribute that overrides the default `style` via
    `divAttributes`.
 3. Pass in global class names to the `class` attribute that gets passed in via `divAttributes`.
@@ -130,7 +129,7 @@ There are a few ways to override its styles:
     variant: ['primary', 'secondary']
   }}
 
-  --columns={4}
+  --columns="repeat(4, 1fr)"
   style="background-color: green"
 > <!-- customize style -->
 </Cartesian>

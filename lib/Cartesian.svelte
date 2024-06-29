@@ -30,14 +30,9 @@
   export let divAttributes = {}
 
   const cartesianProps = getCartesianProduct(props)
-  const columns = `repeat(${Object.keys(cartesianProps[0]).length}, 1fr)`
 </script>
 
-<div
-  class:container={!unstyled}
-  style:--columns={!unstyled ? columns : undefined}
-  {...divAttributes}
->
+<div class:container={!unstyled} {...divAttributes}>
   {#each cartesianProps as innerProps}
     <div>
       {#if asChild}
