@@ -12,6 +12,10 @@
 <style>
   button {
     border: 1px solid transparent;
+
+    &:hover {
+      background-color: transparent;
+    }
   }
   .primary {
     background-color: yellow;
@@ -21,6 +25,11 @@
   .secondary {
     background-color: black;
     color: white;
+
+    &:hover {
+      color: black;
+      border-color: black;
+    }
   }
   .small {
     min-height: 1rem;
