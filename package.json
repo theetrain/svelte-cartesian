@@ -5,23 +5,19 @@
   "type": "module",
   "files": [
     "index.js",
-    "src/lib"
+    "lib"
   ],
   "exports": [
     "./index.js"
   ],
   "scripts": {
-    "dev": "vite dev",
-    "test:unit": "vitest"
+    "test:unit": "vitest",
+    "test:e2e": ""
   },
   "author": "Enrico Sacchetti <enrico@theetrain.ca>",
   "license": "MIT",
   "devDependencies": {
     "@eslint/eslintrc": "^3.1.0",
-    "@playwright/test": "^1.44.1",
-    "@sveltejs/adapter-node": "^5.2.0",
-    "@sveltejs/kit": "^2.5.17",
-    "@sveltejs/vite-plugin-svelte": "^3.1.1",
     "@types/node": "^20.14.8",
     "eslint": "^9.5.0",
     "eslint-config-standard": "^17.1.0",

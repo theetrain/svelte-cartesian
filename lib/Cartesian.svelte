@@ -31,7 +31,6 @@
 
   const cartesianProps = getCartesianProduct(props)
   const columns = `repeat(${Object.keys(cartesianProps[0]).length}, 1fr)`
-  console.log({ columns })
 </script>
 
 <div

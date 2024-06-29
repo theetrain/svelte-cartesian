@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { getCartesianProduct } from '../src/lib/cartesian'
+import { getCartesianProduct } from '../lib/cartesian'
 
 describe('getCartesianProduct', () => {
   it('returns prop combinations', () => {

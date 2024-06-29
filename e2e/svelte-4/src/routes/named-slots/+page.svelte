@@ -1,6 +1,6 @@
 <script>
-  import Cartesian from "$lib/Cartesian.svelte"
-  import Button from "./Button.svelte"
+  import Cartesian from "$main-lib/Cartesian.svelte"
+  import Button from "$lib/Button.svelte"
 
   const props = {
     props: {
@@ -11,9 +11,6 @@
   }
 </script>
 
-<Cartesian {...props}>Make popcorn</Cartesian>
-
-<!-- (3/3) Define all prop combinations -->
 <Cartesian {...props} asChild let:innerProps>
   <Button {...innerProps}>
     <svelte:fragment slot="left">Left stuff</svelte:fragment>
