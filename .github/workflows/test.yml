@@ -21,7 +21,7 @@ jobs:
         run: |
           npm ci
           npm run check
-          npx playwright install
+          npx playwright install --with-deps
           npm run test
       - uses: actions/upload-artifact@v4
         if: always()
