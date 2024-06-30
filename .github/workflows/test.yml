@@ -7,6 +7,7 @@ jobs:
   test:
     timeout-minutes: 10
     runs-on: ubuntu-latest
+    container: mcr.microsoft.com/playwright:v1.45.0-jammy
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -21,7 +22,6 @@ jobs:
         run: |
           npm ci
           npm run check
-          npx playwright install --with-deps
           npm run test
       - uses: actions/upload-artifact@v4
         if: always()
