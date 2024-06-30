@@ -6,6 +6,7 @@
     props: {
       size: ["small", "medium", "large"],
       variant: ["primary", "secondary"],
+      style: ["--bg: limegreen;", undefined],
     },
     Component: Button,
   }

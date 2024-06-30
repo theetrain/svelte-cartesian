@@ -3,7 +3,7 @@
   export let variant = "primary"
 </script>
 
-<button class="{variant} {size}">
+<button {...$$restProps} class="{variant} {size}">
   <slot name="left" />
   <slot />
   <slot name="right" />
@@ -18,7 +18,7 @@
     }
   }
   .primary {
-    background-color: yellow;
+    background-color: var(--bg, yellow);
     border-color: black;
     color: black;
   }
