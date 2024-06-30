@@ -20,6 +20,7 @@ jobs:
         working-directory: e2e/svelte-4
         run: |
           npm ci
+          npm run check
           npx playwright install
           npm run test
       - uses: actions/upload-artifact@v4
