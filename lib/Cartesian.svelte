@@ -21,6 +21,7 @@
   /**
    * Disable built-in CSS.
    * @type {boolean}
+   * @default false
    */
   export let unstyled = false
 

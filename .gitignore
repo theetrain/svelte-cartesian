@@ -29,6 +29,7 @@ dist-ssr
 .vercel
 /.svelte-kit
 /build
+*.tgz
 
 # Env
 .env

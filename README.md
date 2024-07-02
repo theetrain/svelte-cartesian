@@ -3,6 +3,8 @@
 A single component that helps render prop combinations (the "Cartesian
 Product") for visual regression testing.
 
+<img src="./e2e/svelte-4/tests/tests.spec.js-snapshots/custom-styles-1-chromium-linux.png" alt="svelte-cartesian example">
+
 - [Why](#why)
   - [Before using `svelte-cartesian`](#before-using-svelte-cartesian)
   - [After using `svelte-cartesian`](#after-using-svelte-cartesian)
@@ -116,8 +118,8 @@ values you wish to test, and then renders prop combinations.
 <Cartesian
   Component={Button}
   props={{
-    variant=['primary', 'secondary'],
-    size=['medium', 'large']
+    variant: ['primary', 'secondary'],
+    size: ['medium', 'large']
   }}
 >
   Click me
@@ -221,7 +223,55 @@ See more examples in [end to end tests](./e2e/svelte-4/src/routes/).
 
 ## Svelte 5 usage (experimental)
 
-TBD.
+>[!WARNING]
+>This component is based on the release candidate of Svelte 5 and is considered
+>unstable. Any breaking changes will not be properly indicated in
+>`svelte-cartesian` releases at this time, but there are no planned changes.
+
+1. Install package
+
+    ```bash
+    npm install -D svelte-cartesian
+    ```
+
+2. Add component to your page.
+
+    ```html
+    <script>
+      import Button from './Button.svelte'
+      import { CartesianWithRunes as Cartesian } from 'svelte-cartesian'
+    </script>
+
+    {#snippet children()}
+      Click me
+    {/snippet}
+
+    <Cartesian
+      Component={Button}
+      props={{
+        variant: ['primary', 'secondary'],
+        size: ['medium', 'large'],
+        children: [children]
+      }}
+    />
+    ```
+
+3. Pass props with array of potential values, including an explicit `undefined`
+   where applicable. Ensure snippets are passed in as props and defined within
+   the markup of the page using `<CartesianWithRunes>`.
+
+### Styling `<CartesianWithRunes>` (Svelte 5)
+
+Styling `<CartesianWithRunes>` is done in the exact same way as with [`<Cartesian>`](#styling-cartesian-svelte-4).
+
+### `<CartesianWithRunes>` props (Svelte 5)
+
+| prop        | type                    | description                                                                                                                  |
+| ----------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `Component` | `ComponentType`         | **Required**: A Svelte component.                                                                                            |
+| `props`     | `Record<string, any[]>` | **Required**: An object containing prop names and an array of potential values.                                              |
+| `unstyled`   | `?boolean=false`        | Disable built-in CSS. |
+| `divAttributes`   | `?SvelteHTMLElements["div"]={}`        | Any additional props will be spread onto the wrapping `<div>` element as attributes via `$$restProps`. |
 
 ## Project roadmap
 
@@ -232,8 +282,8 @@ TBD.
 
 ### Non-goals
 
-- Svelte 3 support
-- Support other JS frameworks
+- Svelte 3 support.
+- Support other JS frameworks; though I may export [`getCartesianProduct()`](./lib/cartesian.js) upon request.
 
 ## Credits
 
