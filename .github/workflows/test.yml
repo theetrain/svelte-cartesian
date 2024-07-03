@@ -5,6 +5,7 @@ on:
   pull_request:
 jobs:
   test:
+    name: End to End tests
     timeout-minutes: 10
     runs-on: ubuntu-latest
     container: mcr.microsoft.com/playwright:v1.45.0-jammy
@@ -31,3 +32,16 @@ jobs:
           name: playwright-report
           path: e2e/svelte-4/playwright-report/
           retention-days: 30
+      - name: Svelte 5 e2e tests
+        working-directory: e2e/svelte-5
+        run: |
+          npm ci
+          npm run check
+          npm run test
+        env:
+          HOME: /root
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: e2e/svelte-5/playwright-report/
