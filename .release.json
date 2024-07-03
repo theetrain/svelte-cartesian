@@ -1,4 +1,5 @@
 {
+  "branches": ["main"],
   "plugins": [
     [
       "@semantic-release/commit-analyzer",
@@ -37,25 +38,12 @@
       }
     ],
     [
-      "@semantic-release/exec",
-      {
-        "prepareCmd": "sed -Ei 's/:[0-9,\\.]+/:${nextRelease.version}/g' action.yml"
-      }
-    ],
-    [
-      "@semantic-release/git",
-      {
-        "assets": ["action.yml"],
-        "message": "chore(release): bump to ${nextRelease.version} [skip ci]"
-      }
-    ],
-    [
       "@semantic-release/github",
       {
         "successComment": false,
         "failComment": false
       }
-    ]
-  ],
-  "branches": ["main"]
+    ],
+    "@semantic-release/npm"
+  ]
 }

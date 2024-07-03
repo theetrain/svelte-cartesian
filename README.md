@@ -15,6 +15,8 @@ Product") for visual regression testing.
   - [`<Cartesian>` props (Svelte 4)](#cartesian-props-svelte-4)
   - [Examples (Svelte 4)](#examples-svelte-4)
 - [Svelte 5 usage (experimental)](#svelte-5-usage-experimental)
+  - [Styling `<CartesianWithRunes>` (Svelte 5)](#styling-cartesianwithrunes-svelte-5)
+  - [`<CartesianWithRunes>` props (Svelte 5)](#cartesianwithrunes-props-svelte-5)
 - [Project roadmap](#project-roadmap)
   - [Goals](#goals)
   - [Non-goals](#non-goals)
