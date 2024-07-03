@@ -30,7 +30,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: playwright-report
+          name: playwright-report-s4
           path: e2e/svelte-4/playwright-report/
           retention-days: 30
       - name: Svelte 5 e2e tests
@@ -44,5 +44,5 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: playwright-report
+          name: playwright-report-s5
           path: e2e/svelte-5/playwright-report/
