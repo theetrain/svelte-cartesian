@@ -210,14 +210,14 @@ There are a few ways to override its styles:
 
 ### `<Cartesian>` props (Svelte 4)
 
-| prop        | type                    | description                                                                                                                  |
-| ----------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `Component` | `ComponentType`         | **Required**: A Svelte component.                                                                                            |
-| `props`     | `Record<string, any[]>` | **Required**: An object containing prop names and an array of potential values.                                              |
-| `asChild`   | `?boolean=false`        | Renders the default slot's contents. Each Cartesian's iteration will pass `innerProps` as slot props. Default value `false`. |
-| `unstyled`   | `?boolean=false`        | Disable built-in CSS. |
-| `divAttributes`   | `?SvelteHTMLElements["div"]={}`        | Any additional props will be spread onto the wrapping `<div>` element as attributes via `$$restProps`. |
-| `let:innerProps`   | `Record<string, any>`        | Provides a single combination of props at every iteration. Use this alongside `asChild` to spread `innerProps` to your nested component. |
+| prop             | type                            | description                                                                                                                              |
+| ---------------- | ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `Component`      | `ComponentType`                 | **Required**: A Svelte component.                                                                                                        |
+| `props`          | `Record<string, any[]>`         | **Required**: An object containing prop names and an array of potential values.                                                          |
+| `asChild`        | `?boolean=false`                | Renders the default slot's contents. Each Cartesian's iteration will pass `innerProps` as slot props. Default value `false`.             |
+| `unstyled`       | `?boolean=false`                | Disable built-in CSS.                                                                                                                    |
+| `divAttributes`  | `?SvelteHTMLElements["div"]={}` | Attributes to be spread onto the wrapping `<div>` element.                                                                               |
+| `let:innerProps` | `Record<string, any>`           | Provides a single combination of props at every iteration. Use this alongside `asChild` to spread `innerProps` to your nested component. |
 
 ### Examples (Svelte 4)
 
@@ -268,12 +268,12 @@ Styling `<CartesianWithRunes>` is done in the exact same way as with [`<Cartesia
 
 ### `<CartesianWithRunes>` props (Svelte 5)
 
-| prop        | type                    | description                                                                                                                  |
-| ----------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `Component` | `ComponentType`         | **Required**: A Svelte component.                                                                                            |
-| `props`     | `Record<string, any[]>` | **Required**: An object containing prop names and an array of potential values.                                              |
-| `unstyled`   | `?boolean=false`        | Disable built-in CSS. |
-| `divAttributes`   | `?SvelteHTMLElements["div"]={}`        | Any additional props will be spread onto the wrapping `<div>` element as attributes via `$$restProps`. |
+| prop            | type                            | description                                                                     |
+| --------------- | ------------------------------- | ------------------------------------------------------------------------------- |
+| `Component`     | `ComponentType`                 | **Required**: A Svelte component.                                               |
+| `props`         | `Record<string, any[]>`         | **Required**: An object containing prop names and an array of potential values. |
+| `unstyled`      | `?boolean=false`                | Disable built-in CSS.                                                           |
+| `divAttributes` | `?SvelteHTMLElements["div"]={}` | Attributes to be spread onto the wrapping `<div>` element.                      |
 
 ## Project roadmap
 
