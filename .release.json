@@ -56,5 +56,6 @@
         "failComment": false
       }
     ]
-  ]
+  ],
+  "branches": ["main"]
 }
