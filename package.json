@@ -16,6 +16,10 @@
   },
   "author": "Enrico Sacchetti <enrico@theetrain.ca>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theetrain/svelte-cartesian.git"
+  },
   "devDependencies": {
     "@eslint/eslintrc": "^3.1.0",
     "@types/node": "^20.14.8",
