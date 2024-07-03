@@ -3,7 +3,7 @@
 A single component that helps render prop combinations (the "Cartesian
 Product") for visual regression testing.
 
-<img src="./demo.jpg" alt="Cartesian demonstration featuring a 4 x 3 x 2 combination." />
+<img src="https://raw.githubusercontent.com/theetrain/svelte-cartesian/main/demo.jpg" alt="Cartesian demonstration featuring a 4 x 3 x 2 combination." />
 
 - [Why](#why)
   - [Before using `svelte-cartesian`](#before-using-svelte-cartesian)
