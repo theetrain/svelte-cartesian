@@ -1,5 +1,5 @@
 <script>
-  import Cartesian from "$main-lib/Cartesian.svelte"
+  import { Cartesian } from "svelte-cartesian"
   import Button from "$lib/Button.svelte"
 
   const props = {

@@ -23,10 +23,10 @@
   /** @type {{
    * Component: Component
    * props: props
-   * unstyled: unstyled
-   * divAttributes: divAttributes
+   * unstyled?: unstyled
+   * divAttributes?: divAttributes
    * }} */
-  let { Component, props, unstyled, divAttributes = {} } = $props()
+  let { Component, props, unstyled = false, divAttributes = {} } = $props()
 
   const cartesianProps = getCartesianProduct(props)
 </script>

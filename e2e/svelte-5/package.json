@@ -1,5 +1,5 @@
 {
-  "name": "svelte-4",
+  "name": "svelte-5",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -19,9 +19,10 @@
     "@sveltejs/vite-plugin-svelte": "^3.1.1",
     "prettier": "^3.1.1",
     "prettier-plugin-svelte": "^3.1.2",
-    "svelte": "^5.0.0-next.168",
+    "svelte": "^5.0.0-next.171",
+    "svelte-cartesian": "../../",
     "svelte-check": "^3.6.0",
-    "typescript": "^5.0.0",
+    "typescript": "^5.5.3",
     "vite": "^5.0.3"
   },
   "type": "module"
