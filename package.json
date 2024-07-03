@@ -5,7 +5,8 @@
   "type": "module",
   "files": [
     "index.js",
-    "lib"
+    "lib",
+    "demo.jpg"
   ],
   "exports": [
     "./index.js"
