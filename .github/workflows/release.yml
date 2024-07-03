@@ -1,0 +1,27 @@
+name: semantic-release
+
+on:
+  workflow_run:
+    workflows: ["Tests"]
+    branches: [main]
+    types:
+      - completed
+
+permissions:
+  contents: write
+  packages: write
+  pull-requests: write
+
+jobs:
+  semantic-release:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4.1.7
+      - id: release
+        uses: ahmadnassri/action-semantic-release@v2.2.8
+        with:
+          config: ${{ github.workspace }}/.release.json
+        env:
+          NPM_TOKEN: ${{ github.token }}

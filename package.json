@@ -1,6 +1,6 @@
 {
   "name": "svelte-cartesian",
-  "version": "1.0.0",
+  "version": "0.0.0-semantically-released",
   "description": "A single component that helps render prop combinations (the \"Cartesian Product\") for visual regression testing.",
   "type": "module",
   "files": [
