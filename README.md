@@ -3,8 +3,6 @@
 A single component that helps render prop combinations (the "Cartesian
 Product") for visual regression testing.
 
-<img src="./e2e/svelte-4/tests/tests.spec.js-snapshots/custom-styles-1-chromium-linux.png" alt="svelte-cartesian example">
-
 - [Why](#why)
   - [Before using `svelte-cartesian`](#before-using-svelte-cartesian)
   - [After using `svelte-cartesian`](#after-using-svelte-cartesian)
