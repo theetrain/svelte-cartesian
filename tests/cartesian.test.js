@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { getCartesianProduct } from '../lib/cartesian'
+import { createLabel, getCartesianProduct } from '../lib/cartesian'
 
 describe('getCartesianProduct', () => {
   it('returns prop combinations', () => {
@@ -36,5 +36,66 @@ describe('getCartesianProduct', () => {
       { one: 'three', four: 'seven', eight: 'nine' },
       { one: 'three', four: 'seven', eight: 'ten' }
     ])
+  })
+})
+
+describe('createLabel', () => {
+  it('returns short labels (default behaviour)', () => {
+    expect(createLabel({ variant: 'primary' }))
+      .toBe('primary')
+
+    expect(createLabel({ variant: 'primary' }, { verbosity: 'short' }))
+      .toBe('primary')
+
+    expect(createLabel({ variant: 'primary' }, { verbosity: true }))
+      .toBe('primary')
+
+    expect(createLabel({ variant: 'primary', size: 'md' }))
+      .toBe('primary, md')
+
+    expect(createLabel({ variant: 'primary', disabled: true }), 'handles booleans')
+      .toBe('primary, disabled=true')
+  })
+
+  it('returns long labels', () => {
+    expect(createLabel({ variant: 'primary' }, { verbosity: 'long' }))
+      .toBe('variant: primary')
+
+    expect(createLabel({
+      variant: 'primary',
+      size: 'md',
+      obj: { hello: 'world' }
+    }, { verbosity: 'long' }))
+      .toBe('variant: primary\nsize: md\nobj: object')
+  })
+
+  it('handles functions and symbols (short)', () => {
+    expect(createLabel({
+      variant: 'primary',
+      cb: (/** @type {Event} */ e) => {
+        e.preventDefault()
+      },
+      obj: { hello: 'world' },
+      sym: Symbol('foo')
+    }))
+      .toBe('primary')
+  })
+
+  it('returns object contents', () => {
+    expect(createLabel({
+      variant: 'primary',
+      cb: (/** @type {Event} */ e) => {
+        e.preventDefault()
+      },
+      obj: { hello: 'world' }
+    }, { verbosity: 'long-with-objects' }))
+      .toBe(
+        'variant: primary\n\
+cb: (/** @type {Event} */ e) => {\n\
+        e.preventDefault()\n\
+      }\n\
+obj: {\n\
+ "hello": "world"\n\
+}')
   })
 })

@@ -5,5 +5,11 @@ const compat = new FlatCompat()
 export default [
   // standard compatibility
   ...compat.extends('eslint-config-standard'),
-  ...eslintPluginSvelte.configs['flat/recommended']
+  ...eslintPluginSvelte.configs['flat/recommended'],
+  {
+    rules: {
+      'no-multi-str': 0,
+      'operator-linebreak': ['error', 'before']
+    }
+  }
 ]
