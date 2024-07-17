@@ -9,6 +9,7 @@
     "sourceMap": true,
     "strict": true,
     "module": "ESNext",
+    "lib": ["ESNext"],
     "moduleResolution": "Bundler"
   },
   "exclude": ["e2e/**"]

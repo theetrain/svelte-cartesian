@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "check": "svelte-check",
-    "test:unit": "vitest"
+    "test": "vitest"
   },
   "author": "Enrico Sacchetti <enrico@theetrain.ca>",
   "license": "MIT",

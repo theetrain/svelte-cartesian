@@ -15,6 +15,17 @@ interface Props {
    */
   asChild?: boolean
   /**
+   * Generate labels under every iteration.
+   *
+   * - **true**: same as `'short'`.
+   * - **short**: display comma-separated values, skip objects.
+   * - **long**: display line-separated key-value pairs, represent object values
+   * as their type name.
+   * - **long-with-objects**: same as `'long'` but with full object definitions.
+   * @default undefined
+   */
+  labels?: undefined | boolean | 'short' | 'long' | 'long-with-objects'
+  /**
    * Disable built-in CSS.
    * @default false
    */
@@ -26,6 +37,10 @@ interface Props {
   divAttributes?: RestProps
 }
 
+/**
+ * A single component that helps render prop combinations
+ * (the "Cartesian Product") for visual regression testing.
+ */
 export default class Cartesian extends SvelteComponent<
   Props,
   {},
@@ -35,6 +50,16 @@ export default class Cartesian extends SvelteComponent<
       /**
        * Provides a single combination of props at every iteration. Use this
        * alongside `asChild` to spread `innerProps` to your nested component.
+       */
+      innerProps: Record<string, any>
+    }
+    label: {
+      /**
+       * The generated label. Hint: use `<pre>` to render provided newline characters.
+       */
+      label: string
+      /**
+       * A single combination of props.
        */
       innerProps: Record<string, any>
     }
