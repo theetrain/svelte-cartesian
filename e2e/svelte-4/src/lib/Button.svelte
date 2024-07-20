@@ -4,7 +4,7 @@
   export let disabled = false
 
   /** @type {{ [key: string]: string }} */
-  export let definitions = {}
+  export let definitions
 </script>
 
 <button {...$$restProps} {disabled} class="{variant} {size}">
