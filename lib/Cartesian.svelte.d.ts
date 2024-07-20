@@ -17,11 +17,12 @@ interface Props {
   /**
    * Generate labels under every iteration.
    *
-   * - **true**: same as `'short'`.
-   * - **short**: display comma-separated values, skip objects.
-   * - **long**: display line-separated key-value pairs, represent object values
+   * - `'true'`: same as `'short'`.
+   * - '`short'`: display comma-separated values, skip objects.
+   * - '`long'`: display line-separated key-value pairs, represent object values
    * as their type name.
-   * - **long-with-objects**: same as `'long'` but with full object definitions.
+   * - '`long-with-objects'`: same as `'long'` but with full object definitions.
+   * @type {undefined | boolean | 'short' | 'long' | 'long-with-objects'}
    * @default undefined
    */
   labels?: undefined | boolean | 'short' | 'long' | 'long-with-objects'

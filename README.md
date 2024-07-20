@@ -11,8 +11,10 @@ Product") for visual regression testing.
 - [Svelte 4 usage](#svelte-4-usage)
   - [Basic usage (Svelte 4)](#basic-usage-svelte-4)
   - [Usage with slots (Svelte 4)](#usage-with-slots-svelte-4)
+  - [Adding labels (Svelte 4)](#adding-labels-svelte-4)
   - [Styling `<Cartesian>` (Svelte 4)](#styling-cartesian-svelte-4)
   - [`<Cartesian>` props (Svelte 4)](#cartesian-props-svelte-4)
+  - [`<Cartesian>` slots (Svelte 4)](#cartesian-slots-svelte-4)
   - [Examples (Svelte 4)](#examples-svelte-4)
 - [Svelte 5 usage (experimental)](#svelte-5-usage-experimental)
   - [Styling `<CartesianWithRunes>` (Svelte 5)](#styling-cartesianwithrunes-svelte-5)
@@ -168,6 +170,57 @@ values you wish to test, and then renders prop combinations.
 </Cartesian>
 ```
 
+### Adding labels (Svelte 4)
+
+Use the `labels` prop to generate labels next to every component instance.
+
+```html
+    <Cartesian
+      props={props}
+      Component={Component}
+      labels />
+<!--  ^^^^^^ implied as `true` -->
+```
+
+Allowed values for the `labels` prop:
+
+- `true`: same as `'short'`.
+- `'short'`: display comma-separated values, skip objects.
+- `'long'`: display line-separated key-value pairs, represent object values as their type name.
+- `'long-with-objects'`: same as `'long'`, but with full object definitions.
+
+Default labelling behaviour can be overridden with the `label` slot.
+
+```html
+<!-- Using `label` slot prop -->
+<Cartesian
+  props={props}
+  Component={Component}
+  labels
+>
+  <div class="label-container" slot="label" let:label>
+    <span class="label">Props</span>
+    <pre class="props">{label}</pre>
+  </div>
+</Cartesian>
+
+<!--
+  Using `innerProps` slot prop.
+
+  Note: `label` prop isn't required when
+  using `innerProps` to render labels.
+-->
+<Cartesian
+  props={props}
+  Component={Component}
+>
+  <div class="label-container" slot="label" let:innerProps>
+    <span class="label">Props</span>
+    <pre class="props">{customLabel(innerProps)}</pre>
+  </div>
+</Cartesian>
+```
+
 ### Styling `<Cartesian>` (Svelte 4)
 
 `<Cartesian>` has these default CSS behaviours:
@@ -210,14 +263,23 @@ There are a few ways to override its styles:
 
 ### `<Cartesian>` props (Svelte 4)
 
-| prop             | type                            | description                                                                                                                              |
-| ---------------- | ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| `Component`      | `ComponentType`                 | **Required**: A Svelte component.                                                                                                        |
-| `props`          | `Record<string, any[]>`         | **Required**: An object containing prop names and an array of potential values.                                                          |
-| `asChild`        | `?boolean=false`                | Renders the default slot's contents. Each Cartesian's iteration will pass `innerProps` as slot props. Default value `false`.             |
-| `unstyled`       | `?boolean=false`                | Disable built-in CSS.                                                                                                                    |
-| `divAttributes`  | `?SvelteHTMLElements["div"]={}` | Attributes to be spread onto the wrapping `<div>` element.                                                                               |
-| `let:innerProps` | `Record<string, any>`           | Provides a single combination of props at every iteration. Use this alongside `asChild` to spread `innerProps` to your nested component. |
+| prop             | type                                                                            | description                                                                                                                                                                                       |
+| ---------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Component`      | `ComponentType`                                                                 | **Required**: A Svelte component.                                                                                                                                                                 |
+| `props`          | `Record<string, any[]>`                                                         | **Required**: An object containing prop names and an array of potential values.                                                                                                                   |
+| `asChild`        | `?boolean=false`                                                                | Renders the default slot's contents. Each Cartesian's iteration will pass `innerProps` as slot props. Default value `false`. See [usage with slots](#usage-with-slots-svelte-4) for more details. |
+| `labels`         | `?(undefined \| boolean \| 'short' \| 'long' \| 'long-with-objects')=undefined` | Generate labels under every iteration. See [adding labels](#adding-labels-svelte-4) for detailed usage.                                                                                           |
+| `unstyled`       | `?boolean=false`                                                                | Disable built-in CSS.                                                                                                                                                                             |
+| `divAttributes`  | `?SvelteHTMLElements["div"]={}`                                                 | Attributes to be spread onto the wrapping `<div>` element.                                                                                                                                        |
+| `let:innerProps` | `Record<string, any>`                                                           | Provides a single combination of props at every iteration to the *default* slot. Use this alongside `asChild` to spread `innerProps` to your nested component.                                    |
+| `let:label`      | `string`                                                                        | Generated label for a given instance. This is provided to the `label` slot. See [adding labels](#adding-labels-svelte-4) for more details.                                                        |
+
+### `<Cartesian>` slots (Svelte 4)
+
+| slot name | slot props                    | description                                                                                                                                                                                                                              |
+| --------- | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| *default* | `let:innerProps`              | Default slot. Contents get passed to provided `Component`. When `asChild` is set to `true`, contents **MAY** contain provided `Component` and its respective slots; see [usage with slots](#usage-with-slots-svelte-4) for more details. |
+| `label`   | `let:label`, `let:innerProps` | Provide your own label, styles, and logic instead of the default provided label.                                                                                                                                                         |
 
 ### Examples (Svelte 4)
 

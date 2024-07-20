@@ -21,11 +21,11 @@
   /**
    * Generate labels under every iteration.
    *
-   * - **true**: same as `'short'`.
-   * - **short**: display comma-separated values, skip objects.
-   * - **long**: display line-separated key-value pairs, represent object values
+   * - `'true'`: same as `'short'`.
+   * - '`short'`: display comma-separated values, skip objects.
+   * - '`long'`: display line-separated key-value pairs, represent object values
    * as their type name.
-   * - **long-with-objects**: same as `'long'` but with full object definitions.
+   * - '`long-with-objects'`: same as `'long'` but with full object definitions.
    * @type {undefined | boolean | 'short' | 'long' | 'long-with-objects'}
    * @default undefined
    */
@@ -44,6 +44,7 @@
   export let divAttributes = {}
 
   const cartesianProps = getCartesianProduct(props)
+  const showLabels = labels || $$slots.label
 </script>
 
 <!--
@@ -54,13 +55,14 @@
 
 <div class:sc-container={!unstyled} {...divAttributes}>
   {#each cartesianProps as innerProps}
-    {@const label = labels && createLabel(innerProps, { verbosity: labels })}
+    {@const label =
+      showLabels && createLabel(innerProps, { verbosity: labels })}
     <div class="sc-group">
       {#if asChild}
         <div>
           <slot {innerProps} />
         </div>
-        {#if labels}
+        {#if showLabels}
           <div>
             <slot name="label" {label} {innerProps}>
               <pre class="sc-label">{label}</pre>
@@ -73,7 +75,7 @@
             <slot />
           </svelte:component>
         </div>
-        {#if labels}
+        {#if showLabels}
           <div>
             <slot name="label" {label} {innerProps}>
               <pre class="sc-label">{label}</pre>

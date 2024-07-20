@@ -44,7 +44,7 @@
 
 <h2>Custom label, object value</h2>
 
-<Cartesian {...props} labels="long-with-objects">
+<Cartesian {...props}>
   Make popcorn
   <div class="label-container" slot="label" let:innerProps>
     <span class="label">Props</span>
