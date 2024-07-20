@@ -3,8 +3,8 @@
   export let variant = "primary"
   export let disabled = false
 
-  /** @type {{ [key: string]: string }} */
-  export let definitions
+  /** @type {{ [key: string]: string } | undefined} */
+  export let definitions = undefined
 </script>
 
 <button {...$$restProps} {disabled} class="{variant} {size}">
