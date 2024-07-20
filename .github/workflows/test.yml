@@ -17,8 +17,10 @@ jobs:
           node-version: lts/*
       - name: Install dependencies
         run: npm ci
-      - run: npm run check
-      - run: npm run test:unit -- --run
+      - name: svelte-check
+        run: npm run check
+      - name: Unit tests
+        run: npm run test -- --run
       - name: Svelte 4 e2e tests
         working-directory: e2e/svelte-4
         run: |
