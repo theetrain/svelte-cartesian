@@ -12,7 +12,8 @@
   ],
   "scripts": {
     "check": "svelte-check",
-    "test": "vitest"
+    "test": "vitest",
+    "start-4": "cd e2e/svelte-4 && npm i && npm run dev"
   },
   "author": "Enrico Sacchetti <enrico@theetrain.ca>",
   "license": "MIT",
