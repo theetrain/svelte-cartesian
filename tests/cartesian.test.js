@@ -67,6 +67,9 @@ describe('createLabel', () => {
       obj: { hello: 'world' }
     }, { verbosity: 'long' }))
       .toBe('variant: primary\nsize: md\nobj: object')
+
+    expect(createLabel({ variant: 'primary', disabled: true }, { verbosity: 'long' }))
+      .toBe('variant: primary\ndisabled: true')
   })
 
   it('handles functions and symbols (short)', () => {
