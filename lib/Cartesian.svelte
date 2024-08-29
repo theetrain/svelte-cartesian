@@ -71,9 +71,13 @@
         {/if}
       {:else}
         <div>
-          <svelte:component this={Component} {...innerProps}>
-            <slot />
-          </svelte:component>
+          {#if $$slots.default}
+            <svelte:component this={Component} {...innerProps}>
+              <slot />
+            </svelte:component>
+          {:else}
+            <svelte:component this={Component} {...innerProps} />
+          {/if}
         </div>
         {#if showLabels}
           <div>
