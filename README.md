@@ -1,24 +1,31 @@
 # Svelte Cartesian
 
-A single component that helps render prop combinations (the "Cartesian
-Product") for visual regression testing.
+A single component that helps render prop combinations. It can be used with visual regression test software such as [Playwright](https://playwright.dev/)
+or [Storybook](https://storybook.js.org/) (see [examples](#examples)).
+
+Its name comes from "Cartesian Product" in which an intersection of two
+or more arrays form a matrix, such as:
+
+```
+[a, b] * [x, y] --> [[a, x], [a, y], [b, x], [b, y]]
+```
 
 <img src="https://raw.githubusercontent.com/theetrain/svelte-cartesian/main/demo.jpg" alt="Cartesian demonstration featuring a 4 x 3 x 2 combination." />
 
 - [Why](#why)
   - [Before using `svelte-cartesian`](#before-using-svelte-cartesian)
   - [After using `svelte-cartesian`](#after-using-svelte-cartesian)
-- [Svelte 4 usage](#svelte-4-usage)
-  - [Basic usage (Svelte 4)](#basic-usage-svelte-4)
-  - [Usage with slots (Svelte 4)](#usage-with-slots-svelte-4)
-  - [Adding labels (Svelte 4)](#adding-labels-svelte-4)
-  - [Styling `<Cartesian>` (Svelte 4)](#styling-cartesian-svelte-4)
-  - [`<Cartesian>` props (Svelte 4)](#cartesian-props-svelte-4)
-  - [`<Cartesian>` slots (Svelte 4)](#cartesian-slots-svelte-4)
-  - [Examples (Svelte 4)](#examples-svelte-4)
+- [Setup](#setup)
+- [Basic usage](#basic-usage)
+- [Usage with slots](#usage-with-slots)
+  - [Available slots](#available-slots)
+- [Adding labels](#adding-labels)
+- [Styling `<Cartesian>`](#styling-cartesian)
+- [`<Cartesian>` props](#cartesian-props)
+- [Examples](#examples)
+  - [Usage with Playwright](#usage-with-playwright)
+  - [Usage with Storybook](#usage-with-storybook)
 - [Svelte 5 usage (experimental)](#svelte-5-usage-experimental)
-  - [Styling `<CartesianWithRunes>` (Svelte 5)](#styling-cartesianwithrunes-svelte-5)
-  - [`<CartesianWithRunes>` props (Svelte 5)](#cartesianwithrunes-props-svelte-5)
 - [Project roadmap](#project-roadmap)
   - [Goals](#goals)
   - [Non-goals](#non-goals)
@@ -44,27 +51,26 @@ many combinations of a component requires nested `{#each}` loops and some style
 boilerplate. `svelte-cartesian` solves this in one component that accepts prop
 values you wish to test, and then renders prop combinations.
 
-<details>
-<summary>Before and after using <code>svelte-cartesian</code></summary>
-
 ### Before using `svelte-cartesian`
 
+<!-- prettier-ignore-start -->
 ```html
 <script>
-  import { Button } from './Button.svelte'
+  import { Button } from "./Button.svelte"
 </script>
 
 <!-- This nests deeper with every additional prop -->
 {#each ['primary', 'secondary'] as variant}
   {#each ['small', 'medium', 'large'] as size}
     {#each ['main', 'common', 'ghost'] as prominence}
-      <Button {size} {variant} {prominence}>
+      <button {size} {variant} {prominence}>
         Dispense popcorn
-      </Button>
+      </button>
     {/each}
   {/each}
 {/each}
 ```
+<!-- prettier-ignore-end -->
 
 ### After using `svelte-cartesian`
 
@@ -86,28 +92,26 @@ values you wish to test, and then renders prop combinations.
 </Cartesian>
 ```
 
-</details>
-
-## Svelte 4 usage
+## Setup
 
 1. Install package
 
-    ```bash
-    npm install -D svelte-cartesian
-    ```
+   ```bash
+   npm install -D svelte-cartesian
+   ```
 
 2. Add component to your page.
 
-    ```html
-    <script>
-      import { Cartesian } from 'svelte-cartesian'
-    </script>
-    ```
+   ```html
+   <script>
+     import { Cartesian } from "svelte-cartesian"
+   </script>
+   ```
 
 3. Pass props with array of potential values, including an explicit `undefined`
    where applicable.
 
-### Basic usage (Svelte 4)
+## Basic usage
 
 - Pass a component to the `Component` prop.
 - Pass an object to `props` containing possible prop keys for your passed-in
@@ -130,7 +134,7 @@ values you wish to test, and then renders prop combinations.
 </Cartesian>
 ```
 
-### Usage with slots (Svelte 4)
+## Usage with slots
 
 - Pass your component into the default slot.
 - Spread the `innerProps` slot prop to your component, which will render a
@@ -140,45 +144,45 @@ values you wish to test, and then renders prop combinations.
 
 ```html
 <script>
-  import Button from './Button.svelte'
-  import { Cartesian } from 'svelte-cartesian'
+  import Button from "./Button.svelte"
+  import { Cartesian } from "svelte-cartesian"
 
   const props = {
     Component: Button,
     props: {
-      variant: ['primary', 'secondary'],
-      size: ['medium', 'large']
-    }
+      variant: ["primary", "secondary"],
+      size: ["medium", "large"],
+    },
   }
 </script>
 
 <!-- Left slot + default slot -->
 <Cartesian {...props} let:innerProps>
-  <Button {...innerProps}>
-    <svelte:fragment slot="left">
-      Left contents
-    </svelte:fragment>
+  <button {...innerProps}>
+    <svelte:fragment slot="left"> Left contents </svelte:fragment>
     Click me
-  </Button>
+  </button>
 </Cartesian>
 
 <!-- Default slot on its own -->
 <Cartesian {...props} let:innerProps>
-  <Button {...innerProps}>
-    Click me
-  </Button>
+  <button {...innerProps}>Click me</button>
 </Cartesian>
 ```
 
-### Adding labels (Svelte 4)
+### Available slots
+
+| slot name | slot props                    | description                                                                                                                                                                                                                              |
+| --------- | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| _default_ | `let:innerProps`              | Default slot. Contents get passed to provided `Component`. When `asChild` is set to `true`, contents **MAY** contain provided `Component` and its respective slots; see [usage with slots](#usage-with-slots-svelte-4) for more details. |
+| `label`   | `let:label`, `let:innerProps` | Provide your own label, styles, and logic instead of the default provided label.                                                                                                                                                         |
+
+## Adding labels
 
 Use the `labels` prop to generate labels next to every component instance.
 
 ```html
-    <Cartesian
-      props={props}
-      Component={Component}
-      labels />
+<Cartesian props="{props}" Component="{Component}" labels />
 <!--  ^^^^^^ implied as `true` -->
 ```
 
@@ -193,11 +197,7 @@ Default labelling behaviour can be overridden with the `label` slot.
 
 ```html
 <!-- Using `label` slot prop -->
-<Cartesian
-  props={props}
-  Component={Component}
-  labels
->
+<Cartesian props="{props}" Component="{Component}" labels>
   <div class="label-container" slot="label" let:label>
     <span class="label">Props</span>
     <pre class="props">{label}</pre>
@@ -210,10 +210,7 @@ Default labelling behaviour can be overridden with the `label` slot.
   Note: `label` prop isn't required when
   using `innerProps` to render labels.
 -->
-<Cartesian
-  props={props}
-  Component={Component}
->
+<Cartesian props="{props}" Component="{Component}">
   <div class="label-container" slot="label" let:innerProps>
     <span class="label">Props</span>
     <pre class="props">{customLabel(innerProps)}</pre>
@@ -221,7 +218,7 @@ Default labelling behaviour can be overridden with the `label` slot.
 </Cartesian>
 ```
 
-### Styling `<Cartesian>` (Svelte 4)
+## Styling `<Cartesian>`
 
 `<Cartesian>` has these default CSS behaviours:
 
@@ -261,7 +258,7 @@ There are a few ways to override its styles:
 </Cartesian>
 ```
 
-### `<Cartesian>` props (Svelte 4)
+## `<Cartesian>` props
 
 | prop             | type                                                                            | description                                                                                                                                                                                       |
 | ---------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -271,71 +268,72 @@ There are a few ways to override its styles:
 | `labels`         | `?(undefined \| boolean \| 'short' \| 'long' \| 'long-with-objects')=undefined` | Generate labels under every iteration. See [adding labels](#adding-labels-svelte-4) for detailed usage.                                                                                           |
 | `unstyled`       | `?boolean=false`                                                                | Disable built-in CSS.                                                                                                                                                                             |
 | `divAttributes`  | `?SvelteHTMLElements["div"]={}`                                                 | Attributes to be spread onto the wrapping `<div>` element.                                                                                                                                        |
-| `let:innerProps` | `Record<string, any>`                                                           | Provides a single combination of props at every iteration to the *default* slot. Use this alongside `asChild` to spread `innerProps` to your nested component.                                    |
+| `let:innerProps` | `Record<string, any>`                                                           | Provides a single combination of props at every iteration to the _default_ slot. Use this alongside `asChild` to spread `innerProps` to your nested component.                                    |
 | `let:label`      | `string`                                                                        | Generated label for a given instance. This is provided to the `label` slot. See [adding labels](#adding-labels-svelte-4) for more details.                                                        |
 
-### `<Cartesian>` slots (Svelte 4)
+## Examples
 
-| slot name | slot props                    | description                                                                                                                                                                                                                              |
-| --------- | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| *default* | `let:innerProps`              | Default slot. Contents get passed to provided `Component`. When `asChild` is set to `true`, contents **MAY** contain provided `Component` and its respective slots; see [usage with slots](#usage-with-slots-svelte-4) for more details. |
-| `label`   | `let:label`, `let:innerProps` | Provide your own label, styles, and logic instead of the default provided label.                                                                                                                                                         |
+### Usage with Playwright
 
-### Examples (Svelte 4)
+1. Create a page using `<Cartesian />`
+2. Set up a test to take a screenshot of your page.
 
-See more examples in [end to end tests](./e2e/svelte-4/src/routes/).
+```js
+test("default slot", async ({ page }) => {
+  await page.goto("localhost:4173/")
+  await expect(page).toHaveScreenshot()
+})
+```
+
+See complete Playwright examples in [end to end
+tests](./e2e/svelte-4/src/routes/).
+
+### Usage with Storybook
+
+1. Set up a component story.
+2. Import `<Cartesian />` to render prop combinations:
+
+```html
+<script context="module">
+  import { Story, Template } from "@storybook/addon-svelte-csf"
+  import { Cartesian } from "svelte-cartesian"
+  import Switch from "./Switch.svelte"
+
+  export const meta = {
+    title: "Switch",
+    component: Switch,
+    tags: ["autodocs"],
+  }
+  const props = {
+    label: ["Active profile"],
+    size: ["sm", "md"],
+    toggle: ["on", "off"],
+    buttonAttributes: [{ disabled: true }, { disabled: false }],
+  }
+</script>
+
+<!-- Basic Cartesian usage -->
+<template>
+  <Cartesian {props} Component="{Switch}" />
+</template>
+
+<Story name="Switches" />
+
+<!--
+  Optional, but recommended to test states
+-->
+<Story name="Switches Pressed" parameters={{ pseudo: { active: true } }} />
+<Story name="Switches Focused" parameters={{ pseudo: { focusVisible: true } }}
+/>
+```
+
+See
+[storybook-addon-pseudo-states](https://github.com/chromaui/storybook-addon-pseudo-states)
+for more inspiration.
 
 ## Svelte 5 usage (experimental)
 
->[!WARNING]
->This component is based on the release candidate of Svelte 5 and is considered
->unstable. Any breaking changes will not be properly indicated in
->`svelte-cartesian` releases at this time, but there are no planned changes.
-
-1. Install package
-
-    ```bash
-    npm install -D svelte-cartesian
-    ```
-
-2. Add component to your page.
-
-    ```html
-    <script>
-      import Button from './Button.svelte'
-      import { CartesianWithRunes as Cartesian } from 'svelte-cartesian'
-    </script>
-
-    {#snippet children()}
-      Click me
-    {/snippet}
-
-    <Cartesian
-      Component={Button}
-      props={{
-        variant: ['primary', 'secondary'],
-        size: ['medium', 'large'],
-        children: [children]
-      }}
-    />
-    ```
-
-3. Pass props with array of potential values, including an explicit `undefined`
-   where applicable. Ensure snippets are passed in as props and defined within
-   the markup of the page using `<CartesianWithRunes>`.
-
-### Styling `<CartesianWithRunes>` (Svelte 5)
-
-Styling `<CartesianWithRunes>` is done in the exact same way as with [`<Cartesian>`](#styling-cartesian-svelte-4).
-
-### `<CartesianWithRunes>` props (Svelte 5)
-
-| prop            | type                            | description                                                                     |
-| --------------- | ------------------------------- | ------------------------------------------------------------------------------- |
-| `Component`     | `ComponentType`                 | **Required**: A Svelte component.                                               |
-| `props`         | `Record<string, any[]>`         | **Required**: An object containing prop names and an array of potential values. |
-| `unstyled`      | `?boolean=false`                | Disable built-in CSS.                                                           |
-| `divAttributes` | `?SvelteHTMLElements["div"]={}` | Attributes to be spread onto the wrapping `<div>` element.                      |
+See [Svelte 5 README](./README-svelte-5.md).
 
 ## Project roadmap
 
