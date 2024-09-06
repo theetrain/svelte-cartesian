@@ -34,7 +34,7 @@
 <div class:container={!unstyled} {...divAttributes}>
   {#each cartesianProps as innerProps}
     <div>
-      <svelte:component this={Component} {...innerProps}></svelte:component>
+      <Component {...innerProps} />
     </div>
   {/each}
 </div>
