@@ -19,9 +19,22 @@
      import { CartesianWithRunes as Cartesian } from "svelte-cartesian"
    </script>
 
-   {#snippet children()} Click me {/snippet} <Cartesian Component={Button}
-   props={{ variant: ['primary', 'secondary'], size: ['medium', 'large'],
-   children: [children] }} />
+   <!-- define snippet possibilities -->
+   {#snippet children()}
+      Click me
+   {/snippet}
+   
+   <!--
+      Pass in prop and Snippet possibilities as an array of values.
+   -->
+   <Cartesian
+      Component={Button}
+      props={{
+         variant: ['primary', 'secondary'],
+         size: ['medium', 'large'],
+         children: [children]
+      }}
+   />
    ```
 
 3. Pass props with array of potential values, including an explicit `undefined`
