@@ -2,8 +2,13 @@
   import { getCartesianProduct } from "./cartesian"
 
   /**
+   * @import { Component as ComponentType } from "svelte"
+   * @import { SvelteHTMLElements } from "svelte/elements"
+   */
+
+  /**
    * A Svelte component.
-   * @typedef {import('svelte').Component} Component
+   * @typedef {ComponentType} Component
    */
   /**
    * An object containing prop names and array of potential values.
@@ -16,7 +21,8 @@
    */
   /**
    * HTML attributes to pass to the wrapping `<div>`.
-   * @typedef {import('svelte/elements').SvelteHTMLElements["div"]} divAttributes
+   * @typedef {Omit<SvelteHTMLElements["div"], "class" | "hidden"> & {class?:
+   * string; hidden?: boolean}} DivAttributes
    * @default {}
    */
 
@@ -24,7 +30,7 @@
    * Component: Component
    * props: props
    * unstyled?: unstyled
-   * divAttributes?: divAttributes
+   * divAttributes?: DivAttributes
    * }} */
   let { Component, props, unstyled = false, divAttributes = {} } = $props()
 

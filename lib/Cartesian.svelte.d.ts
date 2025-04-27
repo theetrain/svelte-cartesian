@@ -1,11 +1,13 @@
-import type { ComponentType, SvelteComponent } from "svelte";
-import type { SvelteHTMLElements } from 'svelte/elements'
+import type { SvelteComponent } from "svelte"
+import type { SvelteHTMLElements } from "svelte/elements"
 
 type RestProps = SvelteHTMLElements["div"]
 
 interface Props {
   /** A Svelte component. */
-  Component: ComponentType
+  Component: typeof import("svelte") extends { mount: any }
+    ? import("svelte").ComponentType // Svelte 4 detected
+    : import("svelte").Component // Svelte 5 detected
   /** An object containing prop names and an array of potential values. */
   props: Record<string, any[]>
   /**
@@ -25,7 +27,7 @@ interface Props {
    * @type {undefined | boolean | 'short' | 'long' | 'long-with-objects'}
    * @default undefined
    */
-  labels?: undefined | boolean | 'short' | 'long' | 'long-with-objects'
+  labels?: undefined | boolean | "short" | "long" | "long-with-objects"
   /**
    * Disable built-in CSS.
    * @default false
